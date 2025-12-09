@@ -1,0 +1,10 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4 #kind APIs
+name: grune-erde-cluster
+nodes:
+- role: control-plane
+  extraPortMappings:
+  - containerPort: 30000 # node container port
+    hostPort: 8000 #host machine port -> localhost:8000 -> :30000 on the node
+    protocol : TCP
+- role: worker

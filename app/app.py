@@ -1,5 +1,18 @@
 from flask import Flask,jsonify
 import datetime
+import os
+
+#configs
+#DB_HOST = os.environ["DB_HOST"]
+#DB_PORT = os.environ["DB_PORT"]
+#DB_NAME = os.environ["DB_NAME"]
+##secrets
+#DB_USER = os.environ["DB_USER"]
+#DB_PASSWORD = os.environ["DB_PASSWORD"]
+#
+
+
+
 
 app = Flask(__name__)
 
@@ -10,6 +23,9 @@ def get_health():
 @app.route("/time")
 def get_time():
     return jsonify({"time":str(datetime.datetime.now())})
+
+
+
 
 
 if __name__ == "__main__":

@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: grune-app-deployment
+  namespace: devops-test
+  labels:
+    app: grune-app
+
+spec:                 # deployment specs
+  replicas: 1
+  selector: 
+    matchLabels: #match pods with grune-app name
+      app: grune-app
+  template:           # pod template
+    metadata:
+      labels:
+        app: grune-app
+    spec:             # pods specs
+      containers: #container specs
+        - name: app-container 
+          env:
+          # from the config maps
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_HOST
+
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_PORT
+
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_NAME
+
+              # from, the secrets
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret      
+                  key: DB_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_PASSWORD
+
+
+
+            
+          image: myapp:last
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+
