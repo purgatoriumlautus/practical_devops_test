@@ -1,0 +1,15 @@
+FROM python:slim
+
+
+
+WORKDIR /home/app
+COPY . .
+RUN useradd app
+RUN chown -R app:app /home/app && chmod -R 7770 /home/app
+
+USER app
+
+RUN pip install -r requirements.txt
+EXPOSE 8000
+
+CMD ["python","app.py"]
