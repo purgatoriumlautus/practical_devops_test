@@ -1,0 +1,17 @@
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: postgresql               
+  namespace: devops-test         
+
+spec:
+  clusterIP: None               
+  selector:
+    app: postgresql             
+  ports:
+    - name: postgres
+      port: 5432                # service portw witihn the cluster
+      targetPort: 5432          # conteiner port
+      protocol: TCP
