@@ -1,4 +1,0 @@
-sozdat' image for postgres custom and load it to nodes.
-now web server works. but pod with postgres fails to load.
-fix it.
-
